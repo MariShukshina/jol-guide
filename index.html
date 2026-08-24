@@ -327,15 +327,18 @@
             <p style="font-size: 14px; color: #666;" id="t_steps_sub">Выполняйте по порядку, статусы обновляются</p>
         </div>
 
+        <!-- Шаг 1 -->
         <div class="card" id="step1Card">
             <div class="step">
                 <div class="step-icon" id="step1Icon">1</div>
                 <div class="step-content">
                     <h3 id="t_step1_title">📱 Связь</h3>
-                    <p id="t_step1_desc">eSIM от $3.25 <span class="badge">можно до поездки</span> или SIM в аэропорту:
-                    <br><strong>MegaCom</strong> — 350 сом за 30 ГБ (рекомендуем)
-                    <br><strong>O!</strong> — 500–1500 сом за 10–30 ГБ
-                    <br><strong>Beeline</strong> — 300–1000 сом за 5–15 ГБ</p>
+                    <p id="t_step1_desc">
+                        eSIM от $3.25 <span class="badge">можно до поездки</span> или SIM в аэропорту:
+                        <br><strong>MegaCom</strong> — 350 сом за 30 ГБ (рекомендуем)
+                        <br><strong>O!</strong> — 500–1500 сом за 10–30 ГБ
+                        <br><strong>Beeline</strong> — 300–1000 сом за 5–15 ГБ
+                    </p>
                     <p style="font-size: 12px; color: #888;" id="t_step1_passport">📌 Паспорт обязателен для покупки SIM</p>
                     <span class="step-status" id="step1Status">⏳ Ожидает</span>
                     <div class="step-actions">
@@ -346,6 +349,7 @@
             </div>
         </div>
 
+        <!-- Шаг 2 -->
         <div class="card" id="step2Card">
             <div class="step">
                 <div class="step-icon" id="step2Icon">2</div>
@@ -367,6 +371,7 @@
             </div>
         </div>
 
+        <!-- Шаг 3 -->
         <div class="card" id="step3Card">
             <div class="step">
                 <div class="step-icon" id="step3Icon">3</div>
@@ -398,7 +403,7 @@
         </div>
 
         <div class="card">
-            <button class="btn" id="finishBtn" onclick="goToScreen(4)" style="opacity: 0.5; pointer-events: none;" id="t_finish_btn">Посмотреть маршрут →</button>
+            <button class="btn" id="finishBtn" onclick="goToScreen(4)" style="opacity: 0.5; pointer-events: none;">Посмотреть маршрут →</button>
             <p style="font-size: 12px; color: #999; text-align: center; margin-top: 6px;" id="t_finish_hint">Выполните все 3 шага, чтобы активировать кнопку</p>
         </div>
     </div>
@@ -837,14 +842,12 @@
 
         function setLang(lang) {
             currentLang = lang;
-            // Обновляем активную кнопку
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.remove('active');
                 if (btn.getAttribute('onclick') === "setLang('" + lang + "')") {
                     btn.classList.add('active');
                 }
             });
-            // Применяем переводы
             const t = translations[lang];
             if (!t) return;
             document.querySelectorAll('[id^="t_"]').forEach(el => {
@@ -853,9 +856,7 @@
                     el.innerHTML = t[key];
                 }
             });
-            // Обновляем статусы шагов
             updateStepStatusText();
-            // Сохраняем выбор
             try { localStorage.setItem('jol-lang', lang); } catch(e) {}
         }
 
@@ -880,7 +881,6 @@
             });
         }
 
-        // Состояние
         const state = { step1: false, step2: false, step3: false, step1detail: '', hotel: '—' };
 
         function goToScreen(num) {
@@ -1001,9 +1001,6 @@
             goToScreen(1);
         }
 
-        // ============================================================
-        // ЗАГРУЗКА СОХРАНЁННОГО ЯЗЫКА
-        // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
             try {
                 const savedLang = localStorage.getItem('jol-lang');
