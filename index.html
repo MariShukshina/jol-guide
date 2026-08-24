@@ -1,566 +1,482 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>JOL-Guide — Киргизия</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f5f5f5;
-            color: #1a1a1a;
-            padding: 16px 16px 80px 16px;
-            max-width: 480px;
-            margin: 0 auto;
-            min-height: 100vh;
+<script>
+    // ============================================================
+    // ПЕРЕВОДЫ (5 языков)
+    // ============================================================
+    const translations = {
+        ru: {
+            title: 'Ваш личный гид по Киргизии',
+            subtitle: 'С момента прилёта',
+            desc: 'Узнайте, где купить сим-карту, как выгодно обменять деньги и безопасно добраться до отеля. Всё в одном месте, без установки.',
+            diff: '🚀 Отличие: Никаких поисков — всё в одном месте. Работает без установки и регистрации.',
+            btn_start: 'Начать путешествие →',
+            timer: '⏱ 10 секунд — и вы знаете, что делать',
+            prices_title: '💰 Стоимость для партнёров',
+            prices_sub: 'Подключите ваш отель или трансферную компанию к JOL-Guide',
+            price_free: 'Бесплатно',
+            price_free_label: 'Пробный период<br>30 дней',
+            price_hotel: 'Подключение отеля<br>навсегда',
+            price_transfer: 'Трансферная компания<br>навсегда',
+            price_bundle: 'Отель + Трансфер<br>пакет',
+            form_title: '📩 Стать партнёром',
+            form_sub: 'Оставьте заявку, и мы добавим вас в гид для туристов',
+            form_company: 'Название компании',
+            form_type: 'Тип',
+            form_select: 'Выберите...',
+            form_hotel: 'Отель',
+            form_transfer: 'Трансферная компания',
+            form_both: 'Отель + Трансфер',
+            form_email: 'Контактный email',
+            form_message: 'Сообщение',
+            form_submit: 'Отправить заявку',
+            form_success: '✅ Заявка отправлена! Мы свяжемся с вами в течение 24 часов.',
+            back: '← Назад',
+            back2: '← Назад',
+            airport_title: 'Выберите аэропорт',
+            airport_sub: 'Сейчас доступен один вариант, но мы добавим больше позже.',
+            airport_info: 'Международный аэропорт, есть бесплатный Wi-Fi',
+            continue: 'Продолжить →',
+            steps_title: '3 шага до отеля',
+            steps_sub: 'Выполняйте по порядку, статусы обновляются',
+            step1_title: '📱 Связь',
+            step1_desc: 'eSIM от $3.25 <span class="badge">можно до поездки</span> или SIM в аэропорту:',
+            step1_passport: '📌 Паспорт обязателен для покупки SIM',
+            step1_esim: 'Выбрать eSIM',
+            step1_sim: 'Купить SIM',
+            step2_title: '💰 Обмен валюты',
+            step2_desc: 'Не меняйте в аэропорту! Лучший курс в городе.',
+            step2_addresses: 'Адреса обменников:',
+            waiting: '⏳ Ожидает',
+            exchange_label: 'Сколько меняете (USD):',
+            exchange_result: 'Вы получите ≈',
+            exchange_currency: 'сом',
+            exchange_rate: 'Курс: 72.88 сом за 1 USD (в городе). В аэропорту — ниже.',
+            exchange_done: '✅ Я обменял',
+            step3_title: '🚕 Трансфер до отеля',
+            step3_desc: 'Выберите способ. В аэропорту есть бесплатный Wi-Fi для заказа такси.',
+            hotel_choose: 'Где вы остановитесь?',
+            hotel_bishkek: '🏙 Бишкек (центр)',
+            hotel_bishkek_price: 'от 250 сом (Яндекс Go) • 25 сом (маршрутка №380)',
+            hotel_issyk: '🏖 Иссык-Куль (Чолпон-Ата)',
+            hotel_issyk_price: 'от 2500 сом (Яндекс Go) • от 1500 сом (трансфер от отеля)',
+            hotel_tokyo: '🏨 Tokyo Hotel',
+            hotel_tokyo_price: 'Трансфер: 1500 сом (1–3 чел.) / 2000 сом (4–7 чел.)',
+            hotel_selected: 'Ваш выбор:',
+            transfer_done: '✅ Я добрался',
+            finish_btn: 'Посмотреть маршрут →',
+            finish_hint: 'Выполните все 3 шага, чтобы активировать кнопку',
+            final_title: '🎉 Ваш маршрут готов!',
+            final_sub: 'Вот что вам нужно сделать по прилёту в Киргизию:',
+            final_step1_title: 'Связь',
+            final_step1_text: 'eSIM или SIM-карта',
+            final_step2_title: 'Обмен валюты',
+            final_step2_text: 'Обменяли деньги по лучшему курсу',
+            final_step3_title: 'Трансфер',
+            final_step3_text: 'Добрались до отеля',
+            links_title: '📌 Полезные ссылки для Киргизии',
+            link_yandex: 'Яндекс Go — скачать',
+            link_indrive: 'inDrive — скачать',
+            link_airalo: 'Airalo — eSIM для Киргизии',
+            link_bestchange: 'BestChange — актуальный курс',
+            restart: '🔄 Начать заново',
+            home: '🏠 На главную'
+        },
+        en: {
+            title: 'Your Personal Guide to Kyrgyzstan',
+            subtitle: 'From the moment of arrival',
+            desc: 'Find out where to buy a SIM card, how to exchange money at the best rate, and how to safely get to your hotel. Everything in one place, no installation required.',
+            diff: '🚀 Difference: No searching — everything in one place. Works without installation or registration.',
+            btn_start: 'Start Journey →',
+            timer: '⏱ 10 seconds — and you know what to do',
+            prices_title: '💰 Pricing for Partners',
+            prices_sub: 'Connect your hotel or transfer company to JOL-Guide',
+            price_free: 'Free',
+            price_free_label: 'Trial period<br>30 days',
+            price_hotel: 'Hotel connection<br>forever',
+            price_transfer: 'Transfer company<br>forever',
+            price_bundle: 'Hotel + Transfer<br>package',
+            form_title: '📩 Become a Partner',
+            form_sub: 'Leave a request and we will add you to the guide for tourists',
+            form_company: 'Company name',
+            form_type: 'Type',
+            form_select: 'Select...',
+            form_hotel: 'Hotel',
+            form_transfer: 'Transfer company',
+            form_both: 'Hotel + Transfer',
+            form_email: 'Contact email',
+            form_message: 'Message',
+            form_submit: 'Submit request',
+            form_success: '✅ Request sent! We will contact you within 24 hours.',
+            back: '← Back',
+            back2: '← Back',
+            airport_title: 'Select airport',
+            airport_sub: 'Currently one option is available, but we will add more later.',
+            airport_info: 'International airport, free Wi-Fi available',
+            continue: 'Continue →',
+            steps_title: '3 steps to the hotel',
+            steps_sub: 'Follow in order, statuses update automatically',
+            step1_title: '📱 Connectivity',
+            step1_desc: 'eSIM from $3.25 <span class="badge">can be purchased before the trip</span> or SIM at the airport:',
+            step1_passport: '📌 Passport required to buy a SIM',
+            step1_esim: 'Choose eSIM',
+            step1_sim: 'Buy SIM',
+            step2_title: '💰 Currency Exchange',
+            step2_desc: 'Do not exchange at the airport! The best rate is in the city.',
+            step2_addresses: 'Exchange offices addresses:',
+            waiting: '⏳ Waiting',
+            exchange_label: 'How much are you exchanging (USD):',
+            exchange_result: 'You will get ≈',
+            exchange_currency: 'som',
+            exchange_rate: 'Rate: 72.88 som per 1 USD (in the city). At the airport — lower.',
+            exchange_done: '✅ I exchanged',
+            step3_title: '🚕 Transfer to hotel',
+            step3_desc: 'Choose a method. Free Wi-Fi is available at the airport to order a taxi.',
+            hotel_choose: 'Where will you stay?',
+            hotel_bishkek: '🏙 Bishkek (center)',
+            hotel_bishkek_price: 'from 250 som (Yandex Go) • 25 som (minibus #380)',
+            hotel_issyk: '🏖 Issyk-Kul (Cholpon-Ata)',
+            hotel_issyk_price: 'from 2500 som (Yandex Go) • from 1500 som (hotel transfer)',
+            hotel_tokyo: '🏨 Tokyo Hotel',
+            hotel_tokyo_price: 'Transfer: 1500 som (1–3 pers.) / 2000 som (4–7 pers.)',
+            hotel_selected: 'Your choice:',
+            transfer_done: '✅ I arrived',
+            finish_btn: 'View route →',
+            finish_hint: 'Complete all 3 steps to activate the button',
+            final_title: '🎉 Your route is ready!',
+            final_sub: 'Here is what you need to do upon arrival in Kyrgyzstan:',
+            final_step1_title: 'Connectivity',
+            final_step1_text: 'eSIM or SIM card',
+            final_step2_title: 'Currency Exchange',
+            final_step2_text: 'Exchanged money at the best rate',
+            final_step3_title: 'Transfer',
+            final_step3_text: 'Arrived at the hotel',
+            links_title: '📌 Useful links for Kyrgyzstan',
+            link_yandex: 'Yandex Go — download',
+            link_indrive: 'inDrive — download',
+            link_airalo: 'Airalo — eSIM for Kyrgyzstan',
+            link_bestchange: 'BestChange — current exchange rate',
+            restart: '🔄 Start over',
+            home: '🏠 Home'
+        },
+        zh: {
+            title: '吉尔吉斯斯坦个人旅行指南',
+            subtitle: '从抵达那一刻起',
+            desc: '了解在哪里购买SIM卡、如何以最优汇率兑换货币以及如何安全抵达酒店。一站式服务，无需安装。',
+            diff: '🚀 特点：无需搜索 — 一切尽在一处。无需安装和注册即可使用。',
+            btn_start: '开始旅程 →',
+            timer: '⏱ 10秒 — 您就知道该做什么',
+            prices_title: '💰 合作伙伴价格',
+            prices_sub: '将您的酒店或接送公司连接到JOL-Guide',
+            price_free: '免费',
+            price_free_label: '试用期<br>30天',
+            price_hotel: '酒店连接<br>永久',
+            price_transfer: '接送公司<br>永久',
+            price_bundle: '酒店 + 接送<br>套餐',
+            form_title: '📩 成为合作伙伴',
+            form_sub: '留下申请，我们将把您添加到游客指南中',
+            form_company: '公司名称',
+            form_type: '类型',
+            form_select: '选择...',
+            form_hotel: '酒店',
+            form_transfer: '接送公司',
+            form_both: '酒店 + 接送',
+            form_email: '联系邮箱',
+            form_message: '留言',
+            form_submit: '提交申请',
+            form_success: '✅ 申请已发送！我们将在24小时内与您联系。',
+            back: '← 返回',
+            back2: '← 返回',
+            airport_title: '选择机场',
+            airport_sub: '目前只有一个选项，但我们以后会添加更多。',
+            airport_info: '国际机场，提供免费Wi-Fi',
+            continue: '继续 →',
+            steps_title: '到达酒店的3个步骤',
+            steps_sub: '按顺序执行，状态会自动更新',
+            step1_title: '📱 通讯',
+            step1_desc: 'eSIM从$3.25起 <span class="badge">可以在旅行前购买</span> 或在机场购买SIM卡：',
+            step1_passport: '📌 购买SIM卡需要护照',
+            step1_esim: '选择eSIM',
+            step1_sim: '购买SIM卡',
+            step2_title: '💰 货币兑换',
+            step2_desc: '不要在机场兑换！城市里的汇率最好。',
+            step2_addresses: '兑换点地址：',
+            waiting: '⏳ 等待中',
+            exchange_label: '您要兑换多少 (USD)：',
+            exchange_result: '您将获得 ≈',
+            exchange_currency: '索姆',
+            exchange_rate: '汇率：1美元兑换72.88索姆（市内）。机场汇率较低。',
+            exchange_done: '✅ 我已兑换',
+            step3_title: '🚕 前往酒店的交通',
+            step3_desc: '选择一种方式。机场有免费Wi-Fi可以叫出租车。',
+            hotel_choose: '您将住在哪里？',
+            hotel_bishkek: '🏙 比什凯克 (市中心)',
+            hotel_bishkek_price: '从250索姆起 (Yandex Go) • 25索姆 (小巴#380)',
+            hotel_issyk: '🏖 伊塞克湖 (乔尔蓬阿塔)',
+            hotel_issyk_price: '从2500索姆起 (Yandex Go) • 从1500索姆起 (酒店接送)',
+            hotel_tokyo: '🏨 东京酒店',
+            hotel_tokyo_price: '接送：1500索姆 (1-3人) / 2000索姆 (4-7人)',
+            hotel_selected: '您的选择：',
+            transfer_done: '✅ 我已到达',
+            finish_btn: '查看路线 →',
+            finish_hint: '完成所有3个步骤以激活按钮',
+            final_title: '🎉 您的路线已准备好！',
+            final_sub: '这是您抵达吉尔吉斯斯坦后需要做的事情：',
+            final_step1_title: '通讯',
+            final_step1_text: 'eSIM或SIM卡',
+            final_step2_title: '货币兑换',
+            final_step2_text: '以最优汇率兑换了货币',
+            final_step3_title: '交通',
+            final_step3_text: '已到达酒店',
+            links_title: '📌 吉尔吉斯斯坦实用链接',
+            link_yandex: 'Yandex Go — 下载',
+            link_indrive: 'inDrive — 下载',
+            link_airalo: 'Airalo — 吉尔吉斯斯坦eSIM',
+            link_bestchange: 'BestChange — 实时汇率',
+            restart: '🔄 重新开始',
+            home: '🏠 主页'
+        },
+        ky: {
+            title: 'Кыргызстан боюнча жеке гид',
+            subtitle: 'Келгенден баштап',
+            desc: 'SIM-картаны кайдан сатып алууну, акчаны кантип пайдалуу алмаштырууну жана коопсуз мейманканага жетүүнү билип алыңыз. Баары бир жерде, орнотуусуз.',
+            diff: '🚀 Айырма: Издөөнүн кереги жок — баары бир жерде. Орнотуу жана каттоосуз иштейт.',
+            btn_start: 'Саякатты баштоо →',
+            timer: '⏱ 10 секунд — жана эмне кыларыңызды билесиз',
+            prices_title: '💰 Өнөктөштөр үчүн баа',
+            prices_sub: 'Мейманканаңызды же трансфер компанияңызды JOL-Guide тутумуна туташтырыңыз',
+            price_free: 'Акысыз',
+            price_free_label: 'Сынак мөөнөтү<br>30 күн',
+            price_hotel: 'Мейманкананы туташтыруу<br>түбөлүккө',
+            price_transfer: 'Трансфер компаниясы<br>түбөлүккө',
+            price_bundle: 'Мейманкана + Трансфер<br>пакет',
+            form_title: '📩 Өнөктөш болуу',
+            form_sub: 'Арыз калтырыңыз, биз сизди туристтер үчүн гидге кошобуз',
+            form_company: 'Компаниянын аты',
+            form_type: 'Түрү',
+            form_select: 'Тандоо...',
+            form_hotel: 'Мейманкана',
+            form_transfer: 'Трансфер компаниясы',
+            form_both: 'Мейманкана + Трансфер',
+            form_email: 'Байланыш электрондук почтасы',
+            form_message: 'Билдирүү',
+            form_submit: 'Арыз жөнөтүү',
+            form_success: '✅ Арыз жөнөтүлдү! Биз 24 сааттын ичинде сиз менен байланышабыз.',
+            back: '← Артка',
+            back2: '← Артка',
+            airport_title: 'Аэропортту тандаңыз',
+            airport_sub: 'Учурда бир гана вариант бар, бирок кийинчерээк кошобуз.',
+            airport_info: 'Эл аралык аэропорт, акысыз Wi-Fi бар',
+            continue: 'Улантуу →',
+            steps_title: 'Мейманканага 3 кадам',
+            steps_sub: 'Кезек менен аткарыңыз, абалдар жаңыртылат',
+            step1_title: '📱 Байланыш',
+            step1_desc: 'eSIM $3.25тен баштап <span class="badge">саякат алдында сатып алса болот</span> же аэропорттон SIM:',
+            step1_passport: '📌 SIM сатып алуу үчүн паспорт талап кылынат',
+            step1_esim: 'eSIM тандоо',
+            step1_sim: 'SIM сатып алуу',
+            step2_title: '💰 Валюта алмаштыруу',
+            step2_desc: 'Аэропортто алмаштырбаңыз! Эң жакшы курс шаарда.',
+            step2_addresses: 'Алмаштыруучу пункттардын даректери:',
+            waiting: '⏳ Күтүүдө',
+            exchange_label: 'Канча алмаштырасыз (USD):',
+            exchange_result: 'Сиз ≈ аласыз',
+            exchange_currency: 'сом',
+            exchange_rate: 'Курс: 1 USD үчүн 72.88 сом (шаарда). Аэропортто — төмөн.',
+            exchange_done: '✅ Мен алмаштырдым',
+            step3_title: '🚕 Мейманканага трансфер',
+            step3_desc: 'Ыкманы тандаңыз. Аэропортто такси заказ кылуу үчүн акысыз Wi-Fi бар.',
+            hotel_choose: 'Сиз кайда токтойсуз?',
+            hotel_bishkek: '🏙 Бишкек (борбор)',
+            hotel_bishkek_price: '250 сомдон баштап (Яндекс Go) • 25 сом (маршрутка №380)',
+            hotel_issyk: '🏖 Ысык-Көл (Чолпон-Ата)',
+            hotel_issyk_price: '2500 сомдон баштап (Яндекс Go) • 1500 сомдон баштап (мейманканадан трансфер)',
+            hotel_tokyo: '🏨 Tokyo Hotel',
+            hotel_tokyo_price: 'Трансфер: 1500 сом (1–3 адам) / 2000 сом (4–7 адам)',
+            hotel_selected: 'Сиздин тандооңуз:',
+            transfer_done: '✅ Мен жеттим',
+            finish_btn: 'Маршрутту көрүү →',
+            finish_hint: 'Баскычты активдештирүү үчүн бардык 3 кадамды аткарыңыз',
+            final_title: '🎉 Маршрутуңуз даяр!',
+            final_sub: 'Кыргызстанга келгенден кийин эмне кылуу керек:',
+            final_step1_title: 'Байланыш',
+            final_step1_text: 'eSIM же SIM-карта',
+            final_step2_title: 'Валюта алмаштыруу',
+            final_step2_text: 'Акчаны эң жакшы курс боюнча алмаштырдык',
+            final_step3_title: 'Трансфер',
+            final_step3_text: 'Мейманканага жеттик',
+            links_title: '📌 Кыргызстан үчүн пайдалуу шилтемелер',
+            link_yandex: 'Яндекс Go — жүктөп алуу',
+            link_indrive: 'inDrive — жүктөп алуу',
+            link_airalo: 'Airalo — Кыргызстан үчүн eSIM',
+            link_bestchange: 'BestChange — учурдагы курс',
+            restart: '🔄 Кайра баштоо',
+            home: '🏠 Башкы бетке'
+        },
+        kz: {
+            title: 'Қырғызстан бойынша жеке гид',
+            subtitle: 'Келген сәттен бастап',
+            desc: 'SIM-картаны қайдан сатып алуға, ақшаны тиімді айырбастауға және қонақүйге қауіпсіз жетуге болатынын біліңіз. Барлығы бір жерде, орнатусыз.',
+            diff: '🚀 Айырмашылық: Іздеудің қажеті жоқ — бәрі бір жерде. Орнатусыз және тіркеусіз жұмыс істейді.',
+            btn_start: 'Саяхатты бастау →',
+            timer: '⏱ 10 секунд — және не істеу керектігін білесіз',
+            prices_title: '💰 Серіктестер үшін баға',
+            prices_sub: 'Қонақүйіңізді немесе трансфер компанияңызды JOL-Guide жүйесіне қосыңыз',
+            price_free: 'Тегін',
+            price_free_label: 'Сынақ мерзімі<br>30 күн',
+            price_hotel: 'Қонақүйді қосу<br>мәңгілікке',
+            price_transfer: 'Трансфер компаниясы<br>мәңгілікке',
+            price_bundle: 'Қонақүй + Трансфер<br>пакет',
+            form_title: '📩 Серіктес болу',
+            form_sub: 'Өтініш қалдырыңыз, біз сізді туристерге арналған гидке қосамыз',
+            form_company: 'Компания аты',
+            form_type: 'Түрі',
+            form_select: 'Таңдау...',
+            form_hotel: 'Қонақүй',
+            form_transfer: 'Трансфер компаниясы',
+            form_both: 'Қонақүй + Трансфер',
+            form_email: 'Байланыс электрондық поштасы',
+            form_message: 'Хабарлама',
+            form_submit: 'Өтініш жіберу',
+            form_success: '✅ Өтініш жіберілді! Біз 24 сағат ішінде сізбен байланысамыз.',
+            back: '← Артқа',
+            back2: '← Артқа',
+            airport_title: 'Әуежайды таңдаңыз',
+            airport_sub: 'Қазір тек бір нұсқа бар, бірақ кейінірек қосамыз.',
+            airport_info: 'Халықаралық әуежай, тегін Wi-Fi бар',
+            continue: 'Жалғастыру →',
+            steps_title: 'Қонақүйге 3 қадам',
+            steps_sub: 'Кезекпен орындаңыз, мәртебелер жаңартылады',
+            step1_title: '📱 Байланыс',
+            step1_desc: 'eSIM $3.25-тен бастап <span class="badge">саяхат алдында сатып алуға болады</span> немесе әуежайдан SIM:',
+            step1_passport: '📌 SIM сатып алу үшін паспорт қажет',
+            step1_esim: 'eSIM таңдау',
+            step1_sim: 'SIM сатып алу',
+            step2_title: '💰 Валюта айырбастау',
+            step2_desc: 'Әуежайда айырбастамаңыз! Ең жақсы курс қалада.',
+            step2_addresses: 'Айырбастау пункттерінің мекенжайлары:',
+            waiting: '⏳ Күтуде',
+            exchange_label: 'Қанша айырбастайсыз (USD):',
+            exchange_result: 'Сіз ≈ аласыз',
+            exchange_currency: 'сом',
+            exchange_rate: 'Курс: 1 USD үшін 72.88 сом (қалада). Әуежайда — төмен.',
+            exchange_done: '✅ Мен айырбастадым',
+            step3_title: '🚕 Қонақүйге трансфер',
+            step3_desc: 'Тәсілді таңдаңыз. Әуежайда такси тапсырыс беру үшін тегін Wi-Fi бар.',
+            hotel_choose: 'Сіз қайда тоқтайсыз?',
+            hotel_bishkek: '🏙 Бішкек (орталық)',
+            hotel_bishkek_price: '250 сомнан бастап (Яндекс Go) • 25 сом (маршрутка №380)',
+            hotel_issyk: '🏖 Ысық-Көл (Чолпон-Ата)',
+            hotel_issyk_price: '2500 сомнан бастап (Яндекс Go) • 1500 сомнан бастап (қонақүйден трансфер)',
+            hotel_tokyo: '🏨 Tokyo Hotel',
+            hotel_tokyo_price: 'Трансфер: 1500 сом (1–3 адам) / 2000 сом (4–7 адам)',
+            hotel_selected: 'Сіздің таңдауыңыз:',
+            transfer_done: '✅ Мен жеттім',
+            finish_btn: 'Маршрутты көру →',
+            finish_hint: 'Батырманы белсендіру үшін барлық 3 қадамды орындаңыз',
+            final_title: '🎉 Маршрутыңыз дайын!',
+            final_sub: 'Қырғызстанға келгеннен кейін не істеу керек:',
+            final_step1_title: 'Байланыс',
+            final_step1_text: 'eSIM немесе SIM-карта',
+            final_step2_title: 'Валюта айырбастау',
+            final_step2_text: 'Ақшаны ең жақсы курс бойынша айырбастадық',
+            final_step3_title: 'Трансфер',
+            final_step3_text: 'Қонақүйге жеттік',
+            links_title: '📌 Қырғызстан үшін пайдалы сілтемелер',
+            link_yandex: 'Яндекс Go — жүктеп алу',
+            link_indrive: 'inDrive — жүктеп алу',
+            link_airalo: 'Airalo — Қырғызстан үшін eSIM',
+            link_bestchange: 'BestChange — ағымдағы курс',
+            restart: '🔄 Қайта бастау',
+            home: '🏠 Басты бетке'
         }
-        .screen { display: none; animation: fade 0.3s ease; }
-        .screen.active { display: block; }
-        @keyframes fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(1); } }
+    };
 
-        .card {
-            background: white;
-            border-radius: 20px;
-            padding: 24px 20px;
-            margin-bottom: 16px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    // ============================================================
+    // ФУНКЦИЯ СМЕНЫ ЯЗЫКА
+    // ============================================================
+    let currentLang = 'ru';
+
+    function setLang(lang) {
+        currentLang = lang;
+        // Обновляем активную кнопку
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.remove('active');
+            // Находим кнопку с нужным языком по атрибуту onclick
+            if (btn.getAttribute('onclick') === "setLang('" + lang + "')") {
+                btn.classList.add('active');
+            }
+        });
+        // Применяем переводы
+        const t = translations[lang];
+        if (!t) return;
+        document.querySelectorAll('[id^="t_"]').forEach(el => {
+            const key = el.id.replace('t_', '');
+            if (t[key] !== undefined) {
+                el.innerHTML = t[key];
+            }
+        });
+        // Обновляем статусы шагов (текст "Готово" и т.д.)
+        updateStepStatusText();
+        // Сохраняем выбор языка в браузере
+        try { localStorage.setItem('jol-lang', lang); } catch(e) {}
+    }
+
+    // ============================================================
+    // ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
+    // ============================================================
+    function updateStepStatusText() {
+        const doneText = currentLang === 'ru' ? '✅ Готово' :
+                        currentLang === 'en' ? '✅ Done' :
+                        currentLang === 'zh' ? '✅ 完成' :
+                        currentLang === 'ky' ? '✅ Даяр' : '✅ Дайын';
+        const waitingText = currentLang === 'ru' ? '⏳ Ожидает' :
+                           currentLang === 'en' ? '⏳ Waiting' :
+                           currentLang === 'zh' ? '⏳ 等待中' :
+                           currentLang === 'ky' ? '⏳ Күтүүдө' : '⏳ Күтуде';
+        document.querySelectorAll('.step-status').forEach(el => {
+            if (el.classList.contains('done')) {
+                el.textContent = doneText;
+            } else {
+                el.textContent = waitingText;
+            }
+        });
+    }
+
+    // Функции состояния (сохраняем из предыдущего кода)
+    const state = { step1: false, step2: false, step3: false, step1detail: '', hotel: '—' };
+
+    function goToScreen(num) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('screen' + num).classList.add('active');
+        updateFinishButton();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function selectStep(step, type) {
+        if (step === 1) {
+            state.step1 = true;
+            state.step1detail = type === 'eSIM' ? 'eSIM (от $3.25)' : 'SIM-карта (~300 сом)';
+            document.getElementById('step1Icon').className = 'step-icon done';
+            document.getElementById('step1Icon').textContent = '✅';
+            document.getElementById('step1Status').className = 'step-status done';
+            document.getElementById('step1Status').textContent = currentLang === 'ru' ? '✅ Готово' : currentLang === 'en' ? '✅ Done' : currentLang === 'zh' ? '✅ 完成' : currentLang === 'ky' ? '✅ Даяр' : '✅ Дайын';
+            document.getElementById('finalStep1').textContent = state.step1detail;
         }
-        .card h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
-        .card h2 { font-size: 20px; font-weight: 600; margin-bottom: 12px; }
-        .card h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
-        .card p { font-size: 16px; line-height: 1.5; color: #444; margin-bottom: 8px; }
-        .card .sub { color: #666; font-size: 15px; }
-
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 16px;
-            background: #2563eb;
-            color: white;
-            border: none;
-            border-radius: 14px;
-            font-size: 18px;
-            font-weight: 600;
-            text-align: center;
-            cursor: pointer;
-            transition: background 0.2s;
-            margin-top: 12px;
+        if (step === 2) {
+            state.step2 = true;
+            document.getElementById('step2Icon').className = 'step-icon done';
+            document.getElementById('step2Icon').textContent = '✅';
+            document.getElementById('step2Status').className = 'step-status done';
+            document.getElementById('step2Status').textContent = currentLang === 'ru' ? '✅ Готово' : currentLang === 'en' ? '✅ Done' : currentLang === 'zh' ? '✅ 完成' : currentLang === 'ky' ? '✅ Даяр' : '✅ Дайын';
+            const val = document.getElementById('exchangeInput').value || 0;
+            document.getElementById('finalStep2').textContent = (currentLang === 'ru' ? 'Обменяли ' : currentLang === 'en' ? 'Exchanged ' : currentLang === 'zh' ? '已兑换 ' : currentLang === 'ky' ? 'Алмаштырылды ' : 'Айырбасталды ') + val + ' USD';
         }
-        .btn:active { background: #1d4ed8; }
-        .btn-secondary { background: #e5e7eb; color: #1a1a1a; }
-        .btn-secondary:active { background: #d1d5db; }
-        .btn-success { background: #22c55e; }
-        .btn-success:active { background: #16a34a; }
-        .btn-outline { background: transparent; border: 2px solid #2563eb; color: #2563eb; }
-        .btn-outline:active { background: #eff6ff; }
-        .btn-sm {
-            padding: 6px 16px;
-            font-size: 13px;
-            border-radius: 20px;
-            border: none;
-            font-weight: 500;
-            cursor: pointer;
-            background: #e5e7eb;
-            color: #1a1a1a;
-        }
-        .btn-sm:active { opacity: 0.7; }
-        .btn-sm.primary { background: #2563eb; color: white; }
-        .btn-sm.success { background: #22c55e; color: white; }
-
-        .step {
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
-            padding: 16px 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        .step:last-child { border-bottom: none; }
-        .step-icon {
-            width: 36px; height: 36px; min-width: 36px;
-            border-radius: 50%;
-            background: #e5e7eb;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            font-weight: 600;
-            color: #666;
-        }
-        .step-icon.done { background: #22c55e; color: white; }
-        .step-content { flex: 1; }
-        .step-content h3 { font-size: 17px; font-weight: 600; }
-        .step-content p { font-size: 14px; color: #555; margin-top: 2px; }
-        .step-status {
-            font-size: 13px;
-            font-weight: 500;
-            margin-top: 6px;
-            display: inline-block;
-            padding: 2px 12px;
-            border-radius: 20px;
-            background: #f3f4f6;
-        }
-        .step-status.done { background: #dcfce7; color: #15803d; }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            font-size: 16px;
-            margin-top: 8px;
-            font-family: inherit;
-        }
-        input:focus, select:focus, textarea:focus { border-color: #2563eb; outline: none; }
-        textarea { min-height: 80px; resize: vertical; }
-
-        .calc-result {
-            background: #f8fafc;
-            padding: 12px 16px;
-            border-radius: 12px;
-            margin-top: 10px;
-            font-size: 18px;
-            font-weight: 600;
-        }
-        .calc-result span { color: #2563eb; }
-
-        .badge {
-            display: inline-block;
-            background: #fef3c7;
-            color: #b45309;
-            padding: 2px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        .hotel-option {
-            padding: 10px 14px;
-            border-radius: 12px;
-            border: 2px solid #e5e7eb;
-            margin-bottom: 8px;
-            cursor: pointer;
-            transition: border-color 0.2s;
-        }
-        .hotel-option:active { border-color: #2563eb; background: #f8fafc; }
-        .hotel-option.selected { border-color: #2563eb; background: #eff6ff; }
-        .hotel-option .price { font-weight: 600; color: #2563eb; }
-
-        .final-card {
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-            color: white;
-            border-radius: 20px;
-            padding: 24px 20px;
-            margin-bottom: 16px;
-        }
-        .final-card h2 { color: white; }
-        .final-card .step-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.15);
-        }
-        .final-card .step-item:last-child { border-bottom: none; }
-        .final-card .step-item .check { font-size: 20px; }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 12px;
-        }
-        .pricing-item {
-            background: #f8fafc;
-            padding: 14px;
-            border-radius: 12px;
-            text-align: center;
-        }
-        .pricing-item .price {
-            font-size: 22px;
-            font-weight: 700;
-            color: #2563eb;
-        }
-        .pricing-item .label {
-            font-size: 13px;
-            color: #666;
-            margin-top: 4px;
-        }
-
-        .form-group { margin-top: 12px; }
-        .form-group label { font-size: 14px; font-weight: 500; display: block; margin-bottom: 4px; }
-
-        .text-center { text-align: center; }
-        .mt-12 { margin-top: 12px; }
-        .mt-16 { margin-top: 16px; }
-        .flex { display: flex; gap: 8px; }
-        .flex .btn { flex: 1; }
-        .hidden { display: none; }
-
-        .lang-switch {
-            display: flex;
-            gap: 6px;
-            background: #e5e7eb;
-            border-radius: 12px;
-            padding: 4px;
-            margin-bottom: 16px;
-            justify-content: center;
-        }
-        .lang-btn {
-            padding: 6px 14px;
-            border-radius: 10px;
-            border: none;
-            font-weight: 500;
-            font-size: 14px;
-            cursor: pointer;
-            background: transparent;
-            transition: background 0.2s;
-        }
-        .lang-btn.active {
-            background: white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-        .lang-btn:active { opacity: 0.7; }
-    </style>
-</head>
-<body>
-
-    <!-- ======================== ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА ======================== -->
-    <div class="card" style="padding: 12px 16px;">
-        <div class="lang-switch">
-            <button class="lang-btn active" onclick="setLang('ru')">🇷🇺 Рус</button>
-            <button class="lang-btn" onclick="setLang('en')">🇬🇧 EN</button>
-            <button class="lang-btn" onclick="setLang('zh')">🇨🇳 中文</button>
-            <button class="lang-btn" onclick="setLang('ky')">🇰🇬 Кыр</button>
-            <button class="lang-btn" onclick="setLang('kz')">🇰🇿 Қаз</button>
-        </div>
-    </div>
-
-    <!-- ======================== ЭКРАН 1: ЛЕНДИНГ ======================== -->
-    <div id="screen1" class="screen active">
-        <div class="card" style="margin-top: 0;">
-            <div style="background: #2563eb; width: 48px; height: 48px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: white; font-weight: 700; margin-bottom: 16px;">J</div>
-            <h1 id="t_title">Ваш личный гид по Киргизии</h1>
-            <p style="font-size: 18px; font-weight: 500; color: #1a1a1a;" id="t_subtitle">С момента прилёта</p>
-            <p id="t_desc">Узнайте, где купить сим-карту, как выгодно обменять деньги и безопасно добраться до отеля. Всё в одном месте, без установки.</p>
-            <div style="background: #f0f7ff; padding: 12px 16px; border-radius: 12px; margin: 12px 0; border-left: 4px solid #2563eb;">
-                <p style="font-size: 14px; color: #1e40af; margin: 0;" id="t_diff"><strong>🚀 Отличие:</strong> Никаких поисков — всё в одном месте. Работает без установки и регистрации.</p>
-            </div>
-            <button class="btn" onclick="goToScreen(2)" id="t_btn_start">Начать путешествие →</button>
-            <p style="font-size: 12px; color: #999; text-align: center; margin-top: 10px;" id="t_timer">⏱ 10 секунд — и вы знаете, что делать</p>
-        </div>
-
-        <!-- Цены (B2B) -->
-        <div class="card">
-            <h2 id="t_prices_title">💰 Стоимость для партнёров</h2>
-            <p style="font-size: 14px; color: #666;" id="t_prices_sub">Подключите ваш отель или трансферную компанию к JOL-Guide</p>
-            <div class="pricing-grid">
-                <div class="pricing-item">
-                    <div class="price" id="t_price_free">Бесплатно</div>
-                    <div class="label" id="t_price_free_label">Пробный период<br>30 дней</div>
-                </div>
-                <div class="pricing-item">
-                    <div class="price">$99</div>
-                    <div class="label" id="t_price_hotel">Подключение отеля<br>навсегда</div>
-                </div>
-                <div class="pricing-item">
-                    <div class="price">$149</div>
-                    <div class="label" id="t_price_transfer">Трансферная компания<br>навсегда</div>
-                </div>
-                <div class="pricing-item">
-                    <div class="price">$249</div>
-                    <div class="label" id="t_price_bundle">Отель + Трансфер<br>пакет</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Форма заявки -->
-        <div class="card">
-            <h2 id="t_form_title">📩 Стать партнёром</h2>
-            <p style="font-size: 14px; color: #666;" id="t_form_sub">Оставьте заявку, и мы добавим вас в гид для туристов</p>
-            <form id="partnerForm" onsubmit="submitForm(event)">
-                <div class="form-group">
-                    <label id="t_form_company">Название компании</label>
-                    <input type="text" id="companyName" placeholder="Например: Grand Hotel Bishkek" required>
-                </div>
-                <div class="form-group">
-                    <label id="t_form_type">Тип</label>
-                    <select id="companyType" required>
-                        <option value="" id="t_form_select">Выберите...</option>
-                        <option value="hotel" id="t_form_hotel">Отель</option>
-                        <option value="transfer" id="t_form_transfer">Трансферная компания</option>
-                        <option value="both" id="t_form_both">Отель + Трансфер</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label id="t_form_email">Контактный email</label>
-                    <input type="email" id="partnerEmail" placeholder="example@company.com" required>
-                </div>
-                <div class="form-group">
-                    <label id="t_form_message">Сообщение</label>
-                    <textarea id="partnerMessage" placeholder="Расскажите о себе..."></textarea>
-                </div>
-                <button type="submit" class="btn btn-success" id="t_form_submit">Отправить заявку</button>
-            </form>
-            <div id="formSuccess" class="hidden" style="margin-top: 12px; padding: 12px; background: #dcfce7; border-radius: 12px; color: #15803d; text-align: center;" id="t_form_success">
-                ✅ Заявка отправлена! Мы свяжемся с вами в течение 24 часов.
-            </div>
-        </div>
-    </div>
-
-    <!-- ======================== ЭКРАН 2: ВЫБОР АЭРОПОРТА ======================== -->
-    <div id="screen2" class="screen">
-        <div class="card">
-            <button class="btn btn-secondary" onclick="goToScreen(1)" style="margin-top: 0; padding: 8px 16px; width: auto; display: inline-block;" id="t_back">← Назад</button>
-            <h2 style="margin-top: 12px;" id="t_airport_title">Выберите аэропорт</h2>
-            <p id="t_airport_sub">Сейчас доступен один вариант, но мы добавим больше позже.</p>
-            <div style="margin-top: 16px;">
-                <div class="hotel-option selected" style="border-color: #2563eb; background: #eff6ff;">
-                    <strong>🛫 Манас (Бишкек)</strong>
-                    <p style="font-size: 14px; color: #555; margin-top: 4px;" id="t_airport_info">Международный аэропорт, есть бесплатный Wi-Fi</p>
-                </div>
-            </div>
-            <button class="btn" onclick="goToScreen(3)" id="t_continue">Продолжить →</button>
-        </div>
-    </div>
-
-    <!-- ======================== ЭКРАН 3: ГЛАВНЫЙ СЦЕНАРИЙ ======================== -->
-    <div id="screen3" class="screen">
-        <div class="card">
-            <button class="btn btn-secondary" onclick="goToScreen(2)" style="margin-top: 0; padding: 8px 16px; width: auto; display: inline-block;" id="t_back2">← Назад</button>
-            <h2 style="margin-top: 12px;" id="t_steps_title">3 шага до отеля</h2>
-            <p style="font-size: 14px; color: #666;" id="t_steps_sub">Выполняйте по порядку, статусы обновляются</p>
-        </div>
-
-        <!-- Шаг 1: Связь -->
-        <div class="card" id="step1Card">
-            <div class="step">
-                <div class="step-icon" id="step1Icon">1</div>
-                <div class="step-content">
-                    <h3 id="t_step1_title">📱 Связь</h3>
-                    <p id="t_step1_desc">eSIM от $3.25 <span class="badge">можно до поездки</span> или SIM в аэропорту:
-                    <br><strong>MegaCom</strong> — 350 сом за 30 ГБ (рекомендуем)
-                    <br><strong>O!</strong> — 500–1500 сом за 10–30 ГБ
-                    <br><strong>Beeline</strong> — 300–1000 сом за 5–15 ГБ</p>
-                    <p style="font-size: 12px; color: #888;" id="t_step1_passport">📌 Паспорт обязателен для покупки SIM</p>
-                    <span class="step-status" id="step1Status">⏳ Ожидает</span>
-                    <div class="step-actions">
-                        <button class="btn-sm primary" onclick="selectStep(1, 'eSIM')" id="t_step1_esim">Выбрать eSIM</button>
-                        <button class="btn-sm" onclick="selectStep(1, 'SIM')" id="t_step1_sim">Купить SIM</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Шаг 2: Обмен -->
-        <div class="card" id="step2Card">
-            <div class="step">
-                <div class="step-icon" id="step2Icon">2</div>
-                <div class="step-content">
-                    <h3 id="t_step2_title">💰 Обмен валюты</h3>
-                    <p id="t_step2_desc">Не меняйте в аэропорту! Лучший курс в городе. 
-                    <strong id="t_step2_addresses">Адреса обменников:</strong> ул. Киевская, 28 и ул. Абдрахманова, 94 (Ex-ATM24)</p>
-                    <span class="step-status" id="step2Status">⏳ Ожидает</span>
-                    <div style="margin-top: 10px;">
-                        <label style="font-size: 14px; font-weight: 500;" id="t_exchange_label">Сколько меняете (USD):</label>
-                        <input type="number" id="exchangeInput" value="100" min="0" placeholder="Введите сумму в USD" oninput="updateExchange()">
-                        <div class="calc-result">
-                            <span id="t_exchange_result">Вы получите ≈</span> <span id="exchangeAmount">7 288</span> <span id="t_exchange_currency">сом</span>
-                        </div>
-                        <p style="font-size: 12px; color: #888; margin-top: 4px;" id="t_exchange_rate">Курс: 72.88 сом за 1 USD (в городе). В аэропорту — ниже.</p>
-                        <button class="btn-sm success" onclick="selectStep(2, 'exchange')" style="margin-top: 8px;" id="t_exchange_done">✅ Я обменял</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Шаг 3: Трансфер -->
-        <div class="card" id="step3Card">
-            <div class="step">
-                <div class="step-icon" id="step3Icon">3</div>
-                <div class="step-content">
-                    <h3 id="t_step3_title">🚕 Трансфер до отеля</h3>
-                    <p id="t_step3_desc">Выберите способ. В аэропорту есть бесплатный Wi-Fi для заказа такси.</p>
-                    <span class="step-status" id="step3Status">⏳ Ожидает</span>
-                    <div style="margin-top: 10px;">
-                        <p style="font-size: 14px; font-weight: 500; margin-bottom: 6px;" id="t_hotel_choose">Где вы остановитесь?</p>
-                        <div class="hotel-option" onclick="selectHotel(this, 'Бишкек (центр)')">
-                            <strong id="t_hotel_bishkek">🏙 Бишкек (центр)</strong>
-                            <p class="price" id="t_hotel_bishkek_price">от 250 сом (Яндекс Go) • 25 сом (маршрутка №380)</p>
-                        </div>
-                        <div class="hotel-option" onclick="selectHotel(this, 'Иссык-Куль (Чолпон-Ата)')">
-                            <strong id="t_hotel_issyk">🏖 Иссык-Куль (Чолпон-Ата)</strong>
-                            <p class="price" id="t_hotel_issyk_price">от 2500 сом (Яндекс Go) • от 1500 сом (трансфер от отеля)</p>
-                        </div>
-                        <div class="hotel-option" onclick="selectHotel(this, 'Tokyo Hotel (Бишкек)')">
-                            <strong id="t_hotel_tokyo">🏨 Tokyo Hotel</strong>
-                            <p class="price" id="t_hotel_tokyo_price">Трансфер: 1500 сом (1–3 чел.) / 2000 сом (4–7 чел.)</p>
-                        </div>
-                        <div style="margin-top: 10px;">
-                            <p style="font-size: 14px; font-weight: 500;" id="t_hotel_selected">Ваш выбор: <span id="selectedHotelDisplay">—</span></p>
-                            <button class="btn-sm success" onclick="selectStep(3, 'transfer')" style="margin-top: 4px;" id="t_transfer_done">✅ Я добрался</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <button class="btn" id="finishBtn" onclick="goToScreen(4)" style="opacity: 0.5; pointer-events: none;" id="t_finish_btn">Посмотреть маршрут →</button>
-            <p style="font-size: 12px; color: #999; text-align: center; margin-top: 6px;" id="t_finish_hint">Выполните все 3 шага, чтобы активировать кнопку</p>
-        </div>
-    </div>
-
-    <!-- ======================== ЭКРАН 4: ИТОГ ======================== -->
-    <div id="screen4" class="screen">
-        <div class="final-card">
-            <h2 id="t_final_title">🎉 Ваш маршрут готов!</h2>
-            <p style="color: rgba(255,255,255,0.85);" id="t_final_sub">Вот что вам нужно сделать по прилёту в Киргизию:</p>
-            <div style="margin-top: 16px;">
-                <div class="step-item">
-                    <span class="check">✅</span>
-                    <div><strong id="t_final_step1_title">Связь</strong><br><span id="finalStep1" style="font-size: 14px; opacity: 0.8;" id="t_final_step1_text">eSIM или SIM-карта</span></div>
-                </div>
-                <div class="step-item">
-                    <span class="check">✅</span>
-                    <div><strong id="t_final_step2_title">Обмен валюты</strong><br><span id="finalStep2" style="font-size: 14px; opacity: 0.8;" id="t_final_step2_text">Обменяли деньги по лучшему курсу</span></div>
-                </div>
-                <div class="step-item">
-                    <span class="check">✅</span>
-                    <div><strong id="t_final_step3_title">Трансфер</strong><br><span id="finalStep3" style="font-size: 14px; opacity: 0.8;" id="t_final_step3_text">Добрались до отеля</span></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <h3 id="t_links_title">📌 Полезные ссылки для Киргизии</h3>
-            <p style="font-size: 14px;">• <a href="https://business.go.yandex/ru_kg" target="_blank" style="color: #2563eb;" id="t_link_yandex">Яндекс Go — скачать</a></p>
-            <p style="font-size: 14px;">• <a href="https://indrive.com/ru-kg/driver" target="_blank" style="color: #2563eb;" id="t_link_indrive">inDrive — скачать</a></p>
-            <p style="font-size: 14px;">• <a href="https://www.airalo.com/kyrgyzstan-esim" target="_blank" style="color: #2563eb;" id="t_link_airalo">Airalo — eSIM для Киргизии</a></p>
-            <p style="font-size: 14px;">• <a href="https://www.bestchange.ru/" target="_blank" style="color: #2563eb;" id="t_link_bestchange">BestChange — актуальный курс</a></p>
-        </div>
-
-        <div class="card">
-            <button class="btn btn-secondary" onclick="resetAll()" id="t_restart">🔄 Начать заново</button>
-            <button class="btn btn-outline" onclick="goToScreen(1)" id="t_home">🏠 На главную</button>
-        </div>
-    </div>
-
-    <script>
-        // ============================================================
-        // 1. ПЕРЕВОДЫ
-        // ============================================================
-        const translations = {
-            ru: {
-                title: 'Ваш личный гид по Киргизии',
-                subtitle: 'С момента прилёта',
-                desc: 'Узнайте, где купить сим-карту, как выгодно обменять деньги и безопасно добраться до отеля. Всё в одном месте, без установки.',
-                diff: '🚀 Отличие: Никаких поисков — всё в одном месте. Работает без установки и регистрации.',
-                btn_start: 'Начать путешествие →',
-                timer: '⏱ 10 секунд — и вы знаете, что делать',
-                prices_title: '💰 Стоимость для партнёров',
-                prices_sub: 'Подключите ваш отель или трансферную компанию к JOL-Guide',
-                price_free: 'Бесплатно',
-                price_free_label: 'Пробный период<br>30 дней',
-                price_hotel: 'Подключение отеля<br>навсегда',
-                price_transfer: 'Трансферная компания<br>навсегда',
-                price_bundle: 'Отель + Трансфер<br>пакет',
-                form_title: '📩 Стать партнёром',
-                form_sub: 'Оставьте заявку, и мы добавим вас в гид для туристов',
-                form_company: 'Название компании',
-                form_type: 'Тип',
-                form_select: 'Выберите...',
-                form_hotel: 'Отель',
-                form_transfer: 'Трансферная компания',
-                form_both: 'Отель + Трансфер',
-                form_email: 'Контактный email',
-                form_message: 'Сообщение',
-                form_submit: 'Отправить заявку',
-                form_success: '✅ Заявка отправлена! Мы свяжемся с вами в течение 24 часов.',
-                back: '← Назад',
-                back2: '← Назад',
-                airport_title: 'Выберите аэропорт',
-                airport_sub: 'Сейчас доступен один вариант, но мы добавим больше позже.',
-                airport_info: 'Международный аэропорт, есть бесплатный Wi-Fi',
-                continue: 'Продолжить →',
-                steps_title: '3 шага до отеля',
-                steps_sub: 'Выполняйте по порядку, статусы обновляются',
-                step1_title: '📱 Связь',
-                step1_desc: 'eSIM от $3.25 <span class="badge">можно до поездки</span> или SIM в аэропорту:',
-                step1_passport: '📌 Паспорт обязателен для покупки SIM',
-                step1_esim: 'Выбрать eSIM',
-                step1_sim: 'Купить SIM',
-                step2_title: '💰 Обмен валюты',
-                step2_desc: 'Не меняйте в аэропорту! Лучший курс в городе.',
-                step2_addresses: 'Адреса обменников:',
-                waiting: '⏳ Ожидает',
-                exchange_label: 'Сколько меняете (USD):',
-                exchange_result: 'Вы получите ≈',
-                exchange_currency: 'сом',
-                exchange_rate: 'Курс: 72.88 сом за 1 USD (в городе). В аэропорту — ниже.',
-                exchange_done: '✅ Я обменял',
-                step3_title: '🚕 Трансфер до отеля',
-                step3_desc: 'Выберите способ. В аэропорту есть бесплатный Wi-Fi для заказа такси.',
-                hotel_choose: 'Где вы остановитесь?',
-                hotel_bishkek: '🏙 Бишкек (центр)',
-                hotel_bishkek_price: 'от 250 сом (Яндекс Go) • 25 сом (маршрутка №380)',
-                hotel_issyk: '🏖 Иссык-Куль (Чолпон-Ата)',
-                hotel_issyk_price: 'от 2500 сом (Яндекс Go) • от 1500 сом (трансфер от отеля)',
-                hotel_tokyo: '🏨 Tokyo Hotel',
-                hotel_tokyo_price: 'Трансфер: 1500 сом (1–3 чел.) / 2000 сом (4–7 чел.)',
-                hotel_selected: 'Ваш выбор:',
-                transfer_done: '✅ Я добрался',
-                finish_btn: 'Посмотреть маршрут →',
-                finish_hint: 'Выполните все 3 шага, чтобы активировать кнопку',
-                final_title: '🎉 Ваш маршрут готов!',
-                final_sub: 'Вот что вам нужно сделать по прилёту в Киргизию:',
-                final_step1_title: 'Связь',
-                final_step1_text: 'eSIM или SIM-карта',
-                final_step2_title: 'Обмен валюты',
-                final_step2_text: 'Обменяли деньги по лучшему курсу',
-                final_step3_title: 'Трансфер',
-                final_step3_text: 'Добрались до отеля',
-                links_title: '📌 Полезные ссылки для Киргизии',
-                link_yandex: 'Яндекс Go — скачать',
-                link_indrive: 'inDrive — скачать',
-                link_airalo: 'Airalo — eSIM для Киргизии',
-                link_bestchange: 'BestChange — актуальный курс',
-                restart: '🔄 Начать заново',
-                home: '🏠 На главную'
-            },
-            en: {
-                title: 'Your Personal Guide to Kyrgyzstan',
-                subtitle: 'From the moment of arrival',
-                desc: 'Find out where to buy a SIM card, how to exchange money at the best rate, and how to safely get to your hotel. Everything in one place, no installation required.',
-                diff: '🚀 Difference: No searching — everything in one place. Works without installation or registration.',
-                btn_start: 'Start Journey →',
-                timer: '⏱ 10 seconds — and you know what to do',
-                prices_title: '💰 Pricing for Partners',
-                prices_sub: 'Connect your hotel or transfer company to JOL-Guide',
-                price_free: 'Free',
-                price_free_label: 'Trial period<br>30 days',
-                price_hotel: 'Hotel connection<br>forever',
-                price_transfer: 'Transfer company<br>forever',
-                price_bundle: 'Hotel + Transfer<br>package',
-                form_title: '📩 Become a Partner',
-                form_sub: 'Leave a request and we will add you to the guide for tourists',
-                form_company: 'Company name',
-                form_type: 'Type',
-                form_select: 'Select...',
-                form_hotel: 'Hotel',
-                form_transfer: 'Transfer company',
-                form_both: 'Hotel + Transfer',
-                form_email: 'Contact email',
-                form_message: 'Message',
-                form_submit: 'Submit request',
-                form_success: '✅ Request sent! We will contact you within 24 hours.',
-                back: '← Back',
-                back2: '← Back',
-                airport_title: 'Select airport',
-                airport_sub: 'Currently one option is available, but we will add more later.',
-                airport_info: 'International airport, free Wi-Fi available',
-                continue: 'Continue →',
-                steps_title: '3 steps to the hotel',
-                steps_sub: 'Follow in order, statuses update automatically',
-                step1_title: '📱 Connectivity',
-                step1_desc: '
+        if (step === 3) {
+            if (state.hotel === '—') {
+                alert(currentLang === 'ru' ? 'Выберите отель' : currentLang === 'en' ? 'Select a hotel' : currentLang === 'zh' ? '请选择酒店' : currentLang === 'ky' ? 'Мейманкананы тандаңыз' : 'Қонақүйді таңдаңыз');
+                return;
+            }
+            state.step3 = true;
+            document.getElementById('step3Icon').className = 'step-icon done';
+            document.getElementById('step3Icon').textContent = '✅';
+            document.getElementById('step3Status').className = 'step-status done';
+            document.getElementById('step3Status').textContent = currentLang === 'ru' ? '✅ Готово' : currentLang === 'en' ? '✅ Done' : currentLang === 'zh' ? '✅ 完成' : currentLang === 'ky' ? '✅ Даяр' : '✅
