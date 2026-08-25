@@ -303,7 +303,7 @@
         </div>
     </div>
 
-    <!-- ===== ЭКРАН 2 ===== -->
+    <!-- ===== ЭКРАН 2 (исправленный) ===== -->
     <div id="screen2" class="screen">
         <div class="card">
             <button class="btn btn-secondary" onclick="goToScreen(1)" style="margin-top: 0; padding: 8px 16px; width: auto; display: inline-block;" id="t_back">← Назад</button>
@@ -311,7 +311,7 @@
             <p id="t_airport_sub">Сейчас доступен один вариант, но мы добавим больше позже.</p>
             <div style="margin-top: 16px;">
                 <div class="hotel-option selected" style="border-color: #2563eb; background: #eff6ff;">
-                    <strong>🛫 Манас (Бишкек)</strong>
+                    <strong id="t_airport_name">🛫 Манас (Бишкек)</strong>
                     <p style="font-size: 14px; color: #555; margin-top: 4px;" id="t_airport_info">Международный аэропорт, есть бесплатный Wi-Fi</p>
                 </div>
             </div>
@@ -408,7 +408,7 @@
         </div>
     </div>
 
-    <!-- ===== ЭКРАН 4 ===== -->
+    <!-- ===== ЭКРАН 4 (исправленный) ===== -->
     <div id="screen4" class="screen">
         <div class="final-card">
             <h2 id="t_final_title">🎉 Ваш маршрут готов!</h2>
@@ -432,7 +432,9 @@
                     <span class="check">✅</span>
                     <div>
                         <strong id="t_final_step3_title">Трансфер</strong><br>
-                        <span id="finalStep3" style="font-size: 14px; opacity: 0.8;">Добрались до отеля</span>
+                        <span id="finalStep3" style="font-size: 14px; opacity: 0.8;">
+                            <span id="t_transfer_destination">Добрались до отеля</span>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -454,7 +456,7 @@
 
     <script>
         // ============================================================
-        // ПЕРЕВОДЫ (5 языков)
+        // ПЕРЕВОДЫ (5 языков) — с добавленными ключами
         // ============================================================
         const translations = {
             ru: {
@@ -487,6 +489,7 @@
                 back2: '← Назад',
                 airport_title: 'Выберите аэропорт',
                 airport_sub: 'Сейчас доступен один вариант, но мы добавим больше позже.',
+                airport_name: '🛫 Манас (Бишкек)',
                 airport_info: 'Международный аэропорт, есть бесплатный Wi-Fi',
                 continue: 'Продолжить →',
                 steps_title: '3 шага до отеля',
@@ -526,6 +529,10 @@
                 final_step2_text: 'Обменяли деньги по лучшему курсу',
                 final_step3_title: 'Трансфер',
                 final_step3_text: 'Добрались до отеля',
+                transfer_destination: 'Добрались до отеля',
+                transfer_destination_bishkek: 'Трансфер до Бишкека (центр)',
+                transfer_destination_issyk: 'Трансфер до Иссык-Куля (Чолпон-Ата)',
+                transfer_destination_tokyo: 'Трансфер до Tokyo Hotel (Бишкек)',
                 links_title: '📌 Полезные ссылки для Киргизии',
                 link_yandex: 'Яндекс Go — скачать',
                 link_indrive: 'inDrive — скачать',
@@ -564,6 +571,7 @@
                 back2: '← Back',
                 airport_title: 'Select airport',
                 airport_sub: 'Currently one option is available, but we will add more later.',
+                airport_name: '🛫 Manas (Bishkek)',
                 airport_info: 'International airport, free Wi-Fi available',
                 continue: 'Continue →',
                 steps_title: '3 steps to the hotel',
@@ -603,6 +611,10 @@
                 final_step2_text: 'Exchanged money at the best rate',
                 final_step3_title: 'Transfer',
                 final_step3_text: 'Arrived at the hotel',
+                transfer_destination: 'Arrived at the hotel',
+                transfer_destination_bishkek: 'Transfer to Bishkek (center)',
+                transfer_destination_issyk: 'Transfer to Issyk-Kul (Cholpon-Ata)',
+                transfer_destination_tokyo: 'Transfer to Tokyo Hotel (Bishkek)',
                 links_title: '📌 Useful links for Kyrgyzstan',
                 link_yandex: 'Yandex Go — download',
                 link_indrive: 'inDrive — download',
@@ -641,6 +653,7 @@
                 back2: '← 返回',
                 airport_title: '选择机场',
                 airport_sub: '目前只有一个选项，但我们以后会添加更多。',
+                airport_name: '🛫 玛纳斯 (比什凯克)',
                 airport_info: '国际机场，提供免费Wi-Fi',
                 continue: '继续 →',
                 steps_title: '到达酒店的3个步骤',
@@ -680,6 +693,10 @@
                 final_step2_text: '以最优汇率兑换了货币',
                 final_step3_title: '交通',
                 final_step3_text: '已到达酒店',
+                transfer_destination: '已到达酒店',
+                transfer_destination_bishkek: '前往比什凯克 (市中心)',
+                transfer_destination_issyk: '前往伊塞克湖 (乔尔蓬阿塔)',
+                transfer_destination_tokyo: '前往东京酒店 (比什凯克)',
                 links_title: '📌 吉尔吉斯斯坦实用链接',
                 link_yandex: 'Yandex Go — 下载',
                 link_indrive: 'inDrive — 下载',
@@ -718,6 +735,7 @@
                 back2: '← Артка',
                 airport_title: 'Аэропортту тандаңыз',
                 airport_sub: 'Учурда бир гана вариант бар, бирок кийинчерээк кошобуз.',
+                airport_name: '🛫 Манас (Бишкек)',
                 airport_info: 'Эл аралык аэропорт, акысыз Wi-Fi бар',
                 continue: 'Улантуу →',
                 steps_title: 'Мейманканага 3 кадам',
@@ -757,6 +775,10 @@
                 final_step2_text: 'Акчаны эң жакшы курс боюнча алмаштырдык',
                 final_step3_title: 'Трансфер',
                 final_step3_text: 'Мейманканага жеттик',
+                transfer_destination: 'Мейманканага жеттик',
+                transfer_destination_bishkek: 'Бишкекке трансфер (борбор)',
+                transfer_destination_issyk: 'Ысык-Көлгө трансфер (Чолпон-Ата)',
+                transfer_destination_tokyo: 'Tokyo Hotelге трансфер (Бишкек)',
                 links_title: '📌 Кыргызстан үчүн пайдалуу шилтемелер',
                 link_yandex: 'Яндекс Go — жүктөп алуу',
                 link_indrive: 'inDrive — жүктөп алуу',
@@ -795,6 +817,7 @@
                 back2: '← Артқа',
                 airport_title: 'Әуежайды таңдаңыз',
                 airport_sub: 'Қазір тек бір нұсқа бар, бірақ кейінірек қосамыз.',
+                airport_name: '🛫 Манас (Бішкек)',
                 airport_info: 'Халықаралық әуежай, тегін Wi-Fi бар',
                 continue: 'Жалғастыру →',
                 steps_title: 'Қонақүйге 3 қадам',
@@ -834,6 +857,10 @@
                 final_step2_text: 'Ақшаны ең жақсы курс бойынша айырбастадық',
                 final_step3_title: 'Трансфер',
                 final_step3_text: 'Қонақүйге жеттік',
+                transfer_destination: 'Қонақүйге жеттік',
+                transfer_destination_bishkek: 'Бішкекке трансфер (орталық)',
+                transfer_destination_issyk: 'Ысық-Көлге трансфер (Чолпон-Ата)',
+                transfer_destination_tokyo: 'Tokyo Hotelге трансфер (Бішкек)',
                 links_title: '📌 Қырғызстан үшін пайдалы сілтемелер',
                 link_yandex: 'Яндекс Go — жүктеп алу',
                 link_indrive: 'inDrive — жүктеп алу',
@@ -885,11 +912,12 @@
                     lang === 'ky' ? 'Акчаны эң жакшы курс боюнча алмаштырдык' : 'Ақшаны ең жақсы курс бойынша айырбастадық';
             }
             if (!state.step3) {
-                document.getElementById('finalStep3').textContent = 
-                    lang === 'ru' ? 'Добрались до отеля' :
-                    lang === 'en' ? 'Arrived at the hotel' :
-                    lang === 'zh' ? '已到达酒店' :
-                    lang === 'ky' ? 'Мейманканага жеттик' : 'Қонақүйге жеттік';
+                const transferDest = document.getElementById('t_transfer_destination');
+                if (transferDest && t.transfer_destination) {
+                    transferDest.textContent = t.transfer_destination;
+                }
+                // Также обновляем finalStep3 на случай, если он используется
+                document.getElementById('finalStep3').textContent = t.transfer_destination || 'Добрались до отеля';
             }
 
             // Обновляем статусы шагов
@@ -958,7 +986,28 @@
                 document.getElementById('step3Icon').textContent = '✅';
                 document.getElementById('step3Status').className = 'step-status done';
                 document.getElementById('step3Status').textContent = currentLang === 'ru' ? '✅ Готово' : currentLang === 'en' ? '✅ Done' : currentLang === 'zh' ? '✅ 完成' : currentLang === 'ky' ? '✅ Даяр' : '✅ Дайын';
-                document.getElementById('finalStep3').textContent = (currentLang === 'ru' ? 'Трансфер до ' : currentLang === 'en' ? 'Transfer to ' : currentLang === 'zh' ? '交通至 ' : currentLang === 'ky' ? 'Трансфер ' : 'Трансфер ') + state.hotel;
+                
+                // Используем переводы для названий городов
+                const destMap = {
+                    'Бишкек (центр)': currentLang === 'ru' ? 'Трансфер до Бишкека (центр)' :
+                                      currentLang === 'en' ? 'Transfer to Bishkek (center)' :
+                                      currentLang === 'zh' ? '前往比什凯克 (市中心)' :
+                                      currentLang === 'ky' ? 'Бишкекке трансфер (борбор)' : 'Бішкекке трансфер (орталық)',
+                    'Иссык-Куль (Чолпон-Ата)': currentLang === 'ru' ? 'Трансфер до Иссык-Куля (Чолпон-Ата)' :
+                                                currentLang === 'en' ? 'Transfer to Issyk-Kul (Cholpon-Ata)' :
+                                                currentLang === 'zh' ? '前往伊塞克湖 (乔尔蓬阿塔)' :
+                                                currentLang === 'ky' ? 'Ысык-Көлгө трансфер (Чолпон-Ата)' : 'Ысық-Көлге трансфер (Чолпон-Ата)',
+                    'Tokyo Hotel (Бишкек)': currentLang === 'ru' ? 'Трансфер до Tokyo Hotel (Бишкек)' :
+                                             currentLang === 'en' ? 'Transfer to Tokyo Hotel (Bishkek)' :
+                                             currentLang === 'zh' ? '前往东京酒店 (比什凯克)' :
+                                             currentLang === 'ky' ? 'Tokyo Hotelге трансфер (Бишкек)' : 'Tokyo Hotelге трансфер (Бішкек)'
+                };
+                document.getElementById('finalStep3').textContent = destMap[state.hotel] || state.hotel;
+                // Также обновляем t_transfer_destination
+                const transferDest = document.getElementById('t_transfer_destination');
+                if (transferDest) {
+                    transferDest.textContent = destMap[state.hotel] || state.hotel;
+                }
             }
             updateFinishButton();
         }
@@ -1036,6 +1085,11 @@
             document.getElementById('finalStep1').textContent = currentLang === 'ru' ? 'eSIM или SIM-карта' : currentLang === 'en' ? 'eSIM or SIM card' : currentLang === 'zh' ? 'eSIM或SIM卡' : currentLang === 'ky' ? 'eSIM же SIM-карта' : 'eSIM немесе SIM-карта';
             document.getElementById('finalStep2').textContent = currentLang === 'ru' ? 'Обменяли деньги по лучшему курсу' : currentLang === 'en' ? 'Exchanged money at the best rate' : currentLang === 'zh' ? '以最优汇率兑换了货币' : currentLang === 'ky' ? 'Акчаны эң жакшы курс боюнча алмаштырдык' : 'Ақшаны ең жақсы курс бойынша айырбастадық';
             document.getElementById('finalStep3').textContent = currentLang === 'ru' ? 'Добрались до отеля' : currentLang === 'en' ? 'Arrived at the hotel' : currentLang === 'zh' ? '已到达酒店' : currentLang === 'ky' ? 'Мейманканага жеттик' : 'Қонақүйге жеттік';
+            // Также обновляем t_transfer_destination
+            const transferDest = document.getElementById('t_transfer_destination');
+            if (transferDest) {
+                transferDest.textContent = currentLang === 'ru' ? 'Добрались до отеля' : currentLang === 'en' ? 'Arrived at the hotel' : currentLang === 'zh' ? '已到达酒店' : currentLang === 'ky' ? 'Мейманканага жеттик' : 'Қонақүйге жеттік';
+            }
             updateFinishButton();
             goToScreen(1);
         }
