@@ -416,15 +416,24 @@
             <div style="margin-top: 16px;">
                 <div class="step-item">
                     <span class="check">✅</span>
-                    <div><strong id="t_final_step1_title">Связь</strong><br><span id="finalStep1" style="font-size: 14px; opacity: 0.8;">eSIM или SIM-карта</span></div>
+                    <div>
+                        <strong id="t_final_step1_title">Связь</strong><br>
+                        <span id="finalStep1" style="font-size: 14px; opacity: 0.8;">eSIM или SIM-карта</span>
+                    </div>
                 </div>
                 <div class="step-item">
                     <span class="check">✅</span>
-                    <div><strong id="t_final_step2_title">Обмен валюты</strong><br><span id="finalStep2" style="font-size: 14px; opacity: 0.8;">Обменяли деньги по лучшему курсу</span></div>
+                    <div>
+                        <strong id="t_final_step2_title">Обмен валюты</strong><br>
+                        <span id="finalStep2" style="font-size: 14px; opacity: 0.8;">Обменяли деньги по лучшему курсу</span>
+                    </div>
                 </div>
                 <div class="step-item">
                     <span class="check">✅</span>
-                    <div><strong id="t_final_step3_title">Трансфер</strong><br><span id="finalStep3" style="font-size: 14px; opacity: 0.8;">Добрались до отеля</span></div>
+                    <div>
+                        <strong id="t_final_step3_title">Трансфер</strong><br>
+                        <span id="finalStep3" style="font-size: 14px; opacity: 0.8;">Добрались до отеля</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -836,18 +845,21 @@
         };
 
         // ============================================================
-        // ФУНКЦИЯ СМЕНЫ ЯЗЫКА
+        // ФУНКЦИЯ СМЕНЫ ЯЗЫКА (исправленная)
         // ============================================================
         let currentLang = 'ru';
+        const state = { step1: false, step2: false, step3: false, step1detail: '', hotel: '—' };
 
         function setLang(lang) {
             currentLang = lang;
+            // Обновляем активную кнопку
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.remove('active');
                 if (btn.getAttribute('onclick') === "setLang('" + lang + "')") {
                     btn.classList.add('active');
                 }
             });
+            // Применяем переводы ко всем элементам с id="t_..."
             const t = translations[lang];
             if (!t) return;
             document.querySelectorAll('[id^="t_"]').forEach(el => {
@@ -856,12 +868,38 @@
                     el.innerHTML = t[key];
                 }
             });
+
+            // Обновляем финальные элементы, если шаги ещё не выполнены
+            if (!state.step1) {
+                document.getElementById('finalStep1').textContent = 
+                    lang === 'ru' ? 'eSIM или SIM-карта' :
+                    lang === 'en' ? 'eSIM or SIM card' :
+                    lang === 'zh' ? 'eSIM或SIM卡' :
+                    lang === 'ky' ? 'eSIM же SIM-карта' : 'eSIM немесе SIM-карта';
+            }
+            if (!state.step2) {
+                document.getElementById('finalStep2').textContent = 
+                    lang === 'ru' ? 'Обменяли деньги по лучшему курсу' :
+                    lang === 'en' ? 'Exchanged money at the best rate' :
+                    lang === 'zh' ? '以最优汇率兑换了货币' :
+                    lang === 'ky' ? 'Акчаны эң жакшы курс боюнча алмаштырдык' : 'Ақшаны ең жақсы курс бойынша айырбастадық';
+            }
+            if (!state.step3) {
+                document.getElementById('finalStep3').textContent = 
+                    lang === 'ru' ? 'Добрались до отеля' :
+                    lang === 'en' ? 'Arrived at the hotel' :
+                    lang === 'zh' ? '已到达酒店' :
+                    lang === 'ky' ? 'Мейманканага жеттик' : 'Қонақүйге жеттік';
+            }
+
+            // Обновляем статусы шагов
             updateStepStatusText();
+            // Сохраняем выбор языка
             try { localStorage.setItem('jol-lang', lang); } catch(e) {}
         }
 
         // ============================================================
-        // ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
+        // ОБНОВЛЕНИЕ СТАТУСОВ ШАГОВ
         // ============================================================
         function updateStepStatusText() {
             const doneText = currentLang === 'ru' ? '✅ Готово' :
@@ -881,8 +919,9 @@
             });
         }
 
-        const state = { step1: false, step2: false, step3: false, step1detail: '', hotel: '—' };
-
+        // ============================================================
+        // ОСТАЛЬНЫЕ ФУНКЦИИ
+        // ============================================================
         function goToScreen(num) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById('screen' + num).classList.add('active');
